@@ -17,5 +17,7 @@ help_string db '    [general]', 0x0a, 0x0d
             db '        exit      - Exits the shell', 0x0a, 0x0d, 0x0a, 0x0d
             db '    [file system]', 0x0a, 0x0d
             db '        ls        - List files', 0x0a, 0x0d
+            db '        cd        - Change directory', 0x0a, 0x0d
+            db '        cat       - View contents of file', 0x0a, 0x0d, 0
 
 %include "kernel/api.asm"

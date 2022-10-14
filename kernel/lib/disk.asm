@@ -214,3 +214,44 @@ DL_FIND_FILE_ID:
 
 .end:
 	ret
+
+DL_CHECK_BSFS:
+	mov ax, 0
+	call DiskLBAConv
+
+	mov si, 0x2200
+	mov bx, si
+	mov ah, 0x02
+	mov al, 0x01
+	int 13h
+
+	add si, 3
+	
+	mov di, bsfs_boot_header
+	call strcmp
+	
+	mov ah, 0Eh
+	mov bx, 0x0F
+	
+	cmp al, 1
+	jne .fail
+	
+	mov al, byte [si - 1]
+	cmp al, byte 'B'
+	je .boot_set
+	
+	jmp .pass
+	
+.boot_set:
+	mov ah, 1
+	jmp .pass
+	
+.fail:
+	mov al, 0
+	ret
+
+.pass:
+	mov al, 1
+	ret
+
+bsfs_boot_header db '_BS_FS_1', 0

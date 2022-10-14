@@ -1,6 +1,11 @@
 [BITS 16]
 [ORG 0x7C00]
 
+jmp BootStart
+
+bs_fs_drive_header db 'B_BS_FS_1', 0
+
+BootStart:
 MOV DL, 0x0    ;drive 0 = floppy 1
 MOV DH, 0x0    ;head (0=base)
 MOV CH, 0x0    ;track/cylinder
