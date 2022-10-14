@@ -49,4 +49,8 @@ The filesystem data starts at sector 16 where 4 sectors store the entities which
  
  The global flag declares if the directory has to be checked or whether it can be accessed anywhere. For example, programs such as `ls` or `cd` are stored in the `/bin/` directory and are set as global
  
+ The contents of the file is stored after the 4 sectors of entity data. This location can be found with the following:\
+ `entity_data + (4 * 512) + (file_id * 512)`
+ 
+ However, this means in bs:fs v1, files can only be 512 bytes large until I work on expanding and disk fragmenting more.
  
